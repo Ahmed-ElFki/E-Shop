@@ -1,0 +1,6 @@
+const ADD_TO_CART = "ADD_TO_CART";
+const DEL_FROM_CART = "DEL_FROM_CART";
+const ADD_ONE = "ADD_ONE";
+const DEL_ONE = "DELETE_ONE";
+
+export { ADD_TO_CART, DEL_FROM_CART, ADD_ONE, DEL_ONE };
