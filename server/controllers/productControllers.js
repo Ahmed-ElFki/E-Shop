@@ -11,27 +11,37 @@ const registerProduct = async (req, res) => {
     else {
       const productObject = new productModel(req.body);
       const savedProduct = await productObject.save();
-      res.status(400).json({ product: savedProduct._id });
+      res.send({ product: savedProduct._id });
     }
-  } else res.status(409).json({ error });
+  } else res.send({ message: "Product registration error" });
 };
 
 const deleteProduct = async (req, res) => {
   const id = req.params.id;
   try {
     const deletedProduct = await productModel.deleteOne({ _id: id });
-    res.status(200).json({ message: `Product with id ${id} deleted` });
+    res.send({ message: `Product with id ${id} deleted` });
   } catch (error) {
-    res.status(409).json({ error });
+    res.send({ message: `Product with id ${id} delete error` });
   }
 };
 
 const getProducts = async (req, res) => {
   try {
     const productsList = await productModel.find();
-    res.status(200).json({ productsList });
+    res.send({ productsList });
   } catch (error) {
-    res.status(409).json({ error });
+    res.send({ message: "Products retrieve error" });
+  }
+};
+
+const getProductData = async (req, res) => {
+  const productID = req.params.id;
+  try {
+    const product = await productModel.findById(productID);
+    res.send({ product });
+  } catch (error) {
+    res.send({ message: `can not find product id ${productID}` });
   }
 };
 
@@ -39,13 +49,14 @@ const updateProduct = async (req, res) => {
   const productID = req.params.id;
   try {
     const updatedProduct = productModel.updateOne({ _id: productID }, req.body);
-    res.status(200).json({ updatedProduct });
+    res.send({ message: `Product with id ${id} updated` });
   } catch (error) {
-    res.status(409).json({ error });
+    res.send({ message: `Product with id ${id} update error` });
   }
 };
 
 module.exports.registerProduct = registerProduct;
 module.exports.deleteProduct = deleteProduct;
 module.exports.getProducts = getProducts;
+module.exports.getProductData = getProductData;
 module.exports.updateProduct = updateProduct;

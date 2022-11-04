@@ -12,15 +12,16 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 function Sidebar() {
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState([]);
   const loggedUserID = localStorage.getItem("userId") || null;
+  const accountType = localStorage.getItem("accountType") || null;
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getUserData() {
       // eslint-disable-next-line
       const currentUser = await axios
-        .post("/users/", { _id: loggedUserID })
+        .post(`/users/${loggedUserID}`)
         .then((res) => setUserData(res.data.user));
     }
     if (!loggedUserID) navigate("/");
@@ -33,7 +34,7 @@ function Sidebar() {
         margin: "0",
         padding: "0",
         height: "100vh",
-        width: "100px",
+        width: "5vw",
         display: loggedUserID ? "flex" : "none",
         flexDirection: "column",
         justifyContent: " space-between",
@@ -42,13 +43,13 @@ function Sidebar() {
       }}
     >
       <div className="sidebar-top">
-        {/* <Tooltip title={`Welcome ${userData.fullName}`}>
+        <Tooltip title={`Welcome ${userData.fullName}`}>
           <Avatar
             alt={userData.fullName}
             src={userData.avatar}
             sx={{ width: 56, height: 56, mt: "15px" }}
           />
-        </Tooltip> */}
+        </Tooltip>
       </div>
       <div className="sidebar-menu">
         {SidebarDataTop.map((menu, key) => {
@@ -60,9 +61,18 @@ function Sidebar() {
                   textDecoration: "none",
                   display: "flex",
                   flexDirection: "column",
+                  width: "100%",
                 }}
               >
-                <IconButton>{menu.icon}</IconButton>
+                <IconButton
+                  disabled={
+                    menu.access === "Moderator" && accountType === "Moderator"
+                      ? false
+                      : true
+                  }
+                >
+                  {menu.icon}
+                </IconButton>
               </Link>
             </Tooltip>
           );

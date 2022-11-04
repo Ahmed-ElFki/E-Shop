@@ -7,6 +7,7 @@ dotenv.config({ path: "./.env" });
 
 const userRoutes = require("./Routes/userRoutes");
 const productRoutes = require("./Routes/productRoutes");
+const commentRoutes = require("./Routes/commentRoutes");
 
 const app = express();
 const serverPort = process.env.PORT;
@@ -18,6 +19,7 @@ app.use(cors());
 
 app.use("/users", userRoutes);
 app.use("/products", productRoutes);
+app.use("/comments", commentRoutes);
 
 mongoose.connect(process.env.CONNECTION_URL);
 

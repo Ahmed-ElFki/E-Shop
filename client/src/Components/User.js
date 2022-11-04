@@ -5,7 +5,14 @@ import TableRow from "@mui/material/TableRow";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+import axios from "axios";
+
 function User({ _id, fullName, email, accountType, subscriptionDate }) {
+  async function deleteUser() {
+    // eslint-disable-next-line
+    const user = await axios.delete(`/users/delete/${_id}`);
+  }
+
   return (
     <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell component="th" scope="row">
@@ -17,8 +24,16 @@ function User({ _id, fullName, email, accountType, subscriptionDate }) {
       <TableCell align="right">{subscriptionDate}</TableCell>
       <TableCell align="right">
         {" "}
-        <IconButton>
-          <DeleteIcon sx={{ fontSize: 30, color: "red" }} />
+        <IconButton
+          disabled={accountType === "Moderator" ? true : false}
+          onClick={deleteUser}
+        >
+          <DeleteIcon
+            sx={{
+              fontSize: 30,
+              color: "#FF6464",
+            }}
+          />
         </IconButton>
       </TableCell>
     </TableRow>

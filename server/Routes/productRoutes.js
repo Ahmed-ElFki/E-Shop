@@ -5,6 +5,7 @@ const {
   deleteProduct,
   getProducts,
   updateProduct,
+  getProductData,
 } = require("../controllers/productControllers");
 
 const productRoutes = express.Router();
@@ -12,6 +13,8 @@ const productRoutes = express.Router();
 productRoutes.post("/register", registerProduct);
 
 productRoutes.post("/all", getProducts);
+
+productRoutes.post("/:id", getProductData);
 
 productRoutes.delete("/delete/:id", deleteProduct);
 

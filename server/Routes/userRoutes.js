@@ -1,5 +1,4 @@
 const express = require("express");
-const { authSuper } = require("../controllers/authorize");
 const {
   registerUser,
   loginUser,
@@ -17,10 +16,10 @@ userRoutes.post("/login", loginUser);
 
 userRoutes.post("/all", getUsers);
 
-userRoutes.post("/", getUserData);
+userRoutes.post("/:id", getUserData);
 
-userRoutes.delete("/delete", deleteUser);
+userRoutes.delete("/delete/:id", deleteUser);
 
-userRoutes.patch("/update", updateUser);
+userRoutes.patch("/update/:id", updateUser);
 
 module.exports = userRoutes;

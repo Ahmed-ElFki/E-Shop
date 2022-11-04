@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 
+import { useNavigate } from "react-router";
+
 import axios from "axios";
 
 function UpdateProfile() {
@@ -13,6 +15,7 @@ function UpdateProfile() {
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("");
   const loggedUserID = localStorage.getItem("userId") || null;
+  const navigate = useNavigate();
 
   async function updateProfile() {
     // eslint-disable-next-line
@@ -24,6 +27,8 @@ function UpdateProfile() {
       password,
     });
   }
+
+  if (!loggedUserID) navigate("/");
 
   return (
     <Grid

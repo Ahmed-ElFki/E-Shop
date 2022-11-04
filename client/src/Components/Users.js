@@ -5,22 +5,27 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-
 import axios from "axios";
-
 import User from "./User";
+import { useNavigate } from "react-router";
 
 function Users() {
   const [users, setUsers] = useState([]);
+  const loggedUserID = localStorage.getItem("userId") || null;
+  const accountType = localStorage.getItem("accountType") || null;
+  const navigate = useNavigate();
+
   useEffect(() => {
     async function getAllUsers() {
       // eslint-disable-next-line
-      const users = await axios
-        .post("/users/all")
-        .then((res) => setUsers(res.data.usersList));
+      const usersData = await axios.post("/users/all").then((res) => {
+        setUsers(res.data.usersList);
+      });
     }
-    getAllUsers();
-  }, [users]);
+
+    if (!loggedUserID || accountType !== "Moderator") navigate("/");
+    else getAllUsers();
+  }, []);
 
   return (
     <TableContainer>

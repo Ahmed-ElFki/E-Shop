@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -18,9 +19,15 @@ import { delFromCart, addOne, delOne } from "../Actions/CartActions";
 function Cart() {
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
+  const loggedUserID = localStorage.getItem("userId") || null;
+  const navigate = useNavigate();
+
+  if (!loggedUserID) navigate("/");
+
   return (
     <TableContainer>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table>
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>

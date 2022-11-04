@@ -8,6 +8,7 @@ import Sidebar from "./Components/Sidebar";
 import Cart from "./Components/Cart";
 import Users from "./Components/Users";
 import UpdateProfile from "./Components/UpdateProfile";
+import PizzaDetails from "./Components/PizzaDetails";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/Cart" element={<Cart />} />
           <Route path="/Users" element={<Users />} />
           <Route path="/Profile" element={<UpdateProfile />} />
+          <Route path="/PizzaDetails/:_id" element={<PizzaDetails />} />
         </Routes>
       </BrowserRouter>
     </div>
