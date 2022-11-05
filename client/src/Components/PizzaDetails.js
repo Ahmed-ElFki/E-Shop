@@ -17,11 +17,13 @@ function PizzaDetails() {
 
   useEffect(() => {
     async function getPizza() {
+      //eslint-disable-next-line
       const pizza = await axios
         .post(`/products/${_id}`)
         .then((res) => setPizza(res.data.product));
     }
     async function getPizzaComments() {
+      //eslint-disable-next-line
       const pizza = await axios
         .post(`/comments/${_id}`)
         .then((res) => setCommentsList(res.data.productComments));
@@ -35,6 +37,7 @@ function PizzaDetails() {
   }, [commentsList]);
 
   async function addComment() {
+    //eslint-disable-next-line
     const pizzaComment = await axios.post("/comments/register", {
       userId: loggedID,
       productId: _id,
@@ -76,6 +79,7 @@ function PizzaDetails() {
         sx={{
           width: "80vw",
           mt: "15px",
+          mb: "15px",
           paddingTop: "15px",
           paddingBottom: "15px",
           fontSize: 15,

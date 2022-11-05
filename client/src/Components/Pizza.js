@@ -23,12 +23,15 @@ function Pizza({ _id, name, price, desc, picture }) {
   const cart = useSelector((state) => state.cart);
 
   return (
-    <Card sx={{ width: "400px", boxShadow: "2px 2px 3px black" }}>
+    <Card sx={{ width: "400px", boxShadow: "1px 1px 3px black" }}>
       <CardMedia
         component="img"
         image={picture}
         alt={name}
-        sx={{ height: "auto", maxWidth: "100%" }}
+        sx={{
+          height: "auto",
+          maxWidth: "100%",
+        }}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

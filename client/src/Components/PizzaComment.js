@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
 import axios from "axios";
 
 function PizzaComment({ commentId, userId, productId, comment }) {
@@ -16,15 +17,34 @@ function PizzaComment({ commentId, userId, productId, comment }) {
 
   return (
     <Box
-      component="div"
       sx={{
         width: "80vw",
         mb: "15px",
+        display: "flex",
+        justifyContent: "space-between",
+        borderRadius: "5px",
+        boxShadow: "3px 3px 3px black",
       }}
     >
-      <p style={{ fontSize: "25px", padding: "10px 0px", margin: "0" }}>
-        {userData.fullName} : {comment}
-      </p>
+      <div
+        style={{
+          width: "10vw",
+          display: "flex",
+          alignItems: "center",
+          paddingLeft: "10px",
+        }}
+      >
+        <Avatar
+          alt={userData.fullName}
+          src={userData.avatar}
+          sx={{ width: 56, height: 56 }}
+        />
+        <span style={{ marginLeft: "20px", fontSize: 18 }}>
+          {userData.fullName}
+        </span>
+      </div>
+
+      <p style={{ fontSize: 18, paddingRight: "10px" }}>{comment}</p>
     </Box>
   );
 }

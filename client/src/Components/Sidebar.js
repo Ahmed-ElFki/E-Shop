@@ -14,7 +14,6 @@ import { useNavigate } from "react-router";
 function Sidebar() {
   const [userData, setUserData] = useState([]);
   const loggedUserID = localStorage.getItem("userId") || null;
-  const accountType = localStorage.getItem("accountType") || null;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,7 +33,7 @@ function Sidebar() {
         margin: "0",
         padding: "0",
         height: "100vh",
-        width: "5vw",
+        width: "100px",
         display: loggedUserID ? "flex" : "none",
         flexDirection: "column",
         justifyContent: " space-between",
@@ -61,18 +60,9 @@ function Sidebar() {
                   textDecoration: "none",
                   display: "flex",
                   flexDirection: "column",
-                  width: "100%",
                 }}
               >
-                <IconButton
-                  disabled={
-                    menu.access === "Moderator" && accountType === "Moderator"
-                      ? false
-                      : true
-                  }
-                >
-                  {menu.icon}
-                </IconButton>
+                <IconButton>{menu.icon}</IconButton>
               </Link>
             </Tooltip>
           );
